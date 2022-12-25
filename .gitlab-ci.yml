@@ -1,0 +1,21 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  image: golang:1.19-alpine
+  script:
+    - go mod download
+    - go build -o build/ ./cmd/prod/main.go
+
+test:
+  stage: test
+  image: golang:1.19-alpine
+  script:
+    - go mod download
+    - go test ./...
+
+deploy:
+  stage: deploy
